@@ -16,4 +16,8 @@ public class Position {
     public int getY() {
         return y;
     }
+
+    public int compareTo(Position position) {
+        return Range.range(this,position);
+    }
 }

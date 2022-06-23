@@ -4,8 +4,8 @@ public abstract class Player extends Unit{
     protected int experience;
     protected int playerLevel;
 
-    protected Player(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
-        super(character, name, healthCapacity, attackPoints, defensePoints);
+    protected Player(String name, int healthCapacity, int attackPoints, int defensePoints) {
+        super('@', name, healthCapacity, attackPoints, defensePoints);
         this.experience=0;
         this.playerLevel=1;
     }
@@ -22,5 +22,6 @@ public abstract class Player extends Unit{
         else throw new Exception("can't level up, there is no enough exp");
     }
 
-    protected abstract void castAbility();
+    protected abstract void onGameTick();
+    protected abstract void castAbility() throws Exception;
 }
