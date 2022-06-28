@@ -1,6 +1,9 @@
 package Business;
 
 public class Warrior extends Player{
+    protected static final int WARRIOR_HEALTH_BONUS = 5;
+    protected static final int WARRIOR_ATTACK_BONUS = 2;
+    protected static final int WARRIOR_DEFENSE_BONUS = 1;
 
     private int abilityCooldown;
     private int remainingCooldown;
@@ -12,12 +15,12 @@ public class Warrior extends Player{
         this.remainingCooldown=0;
     }
 
-    protected void levelUp() throws Exception {
+    protected void levelUp() {
         super.levelUp();
         remainingCooldown=0;
-        health.healthPoolIncrease(5*(playerLevel-1));
-        attackPoints+=2*(playerLevel-1);
-        defensePoints+=(playerLevel-1);
+        health.healthPoolIncrease(WARRIOR_HEALTH_BONUS*playerLevel);
+        attackPoints+=WARRIOR_ATTACK_BONUS*playerLevel;
+        defensePoints+=WARRIOR_DEFENSE_BONUS*playerLevel;
     }
 
     protected void onGameTick(){
@@ -25,9 +28,7 @@ public class Warrior extends Player{
     }
 
     @Override
-    protected void castAbility() throws Exception {
-        if(remainingCooldown>0)
-            throw new Exception("cannot cast ability has remaining cool down of: " + String.valueOf(remainingCooldown));
+    protected void castAbility() {
         remainingCooldown=abilityCooldown;
         health.healthAmountIncrease(Math.min(health.healthPool, health.healthAmount+(10*defensePoints)));
         //- Randomly hits one enemy within range < 3 for an amount equals to 10% of the warrior’s

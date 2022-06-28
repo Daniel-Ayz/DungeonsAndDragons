@@ -1,6 +1,8 @@
 package Business;
 
 public class Mage extends Player{
+    protected static final int MAGE_MANA_POOL_BONUS = 25;
+    protected static final int MAGE_SPELL_POWER_BONUS = 10;
 
     protected int manaPool;
     protected int currentMana;
@@ -19,11 +21,11 @@ public class Mage extends Player{
         this.abilityRange=abilityRange;
     }
 
-    protected void levelUp() throws Exception {
+    protected void levelUp() {
         super.levelUp();
-        manaPool+=(25*(playerLevel-1));
+        manaPool+=(MAGE_MANA_POOL_BONUS*playerLevel);
         currentMana=Math.min(currentMana+(manaPool/4),manaPool);
-        spellPower+=(10*(playerLevel-1));
+        spellPower+=(MAGE_SPELL_POWER_BONUS*playerLevel);
     }
 
     protected void onGameTick(){
@@ -31,9 +33,7 @@ public class Mage extends Player{
     }
 
     @Override
-    protected void castAbility() throws Exception {
-        if(currentMana<manaCost)
-            throw new Exception("cannot cast ability with current mana: " + String.valueOf(currentMana));
+    protected void castAbility() {
         currentMana-=manaCost;
         int hits=0;
         while(hits<hitsCount ){ // && (∃ living enemy s.t. range(enemy, player) < ability range)

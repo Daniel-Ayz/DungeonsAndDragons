@@ -45,7 +45,7 @@ public class TileFactory {
                 () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
                 () -> new Rogue("Arya Stark", 150, 40, 2, 20),
                 () -> new Rogue("Bronn", 250, 35, 3, 50),
-                () -> new Hunter("Ygritte", 220, 30, 2, 6)
+                //() -> new Hunter("Ygritte", 220, 30, 2, 6)
         );
     }
 
