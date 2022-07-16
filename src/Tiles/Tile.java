@@ -14,7 +14,7 @@ public abstract class Tile implements Comparable<Tile>{
         this.position=position;
     }
 
-    protected char getCharacter() {
+    public char getCharacter() {
         return character;
     }
 

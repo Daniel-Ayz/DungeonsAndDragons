@@ -22,11 +22,13 @@ public class Trap extends Enemy {
             ticksCount = 0;
         else
             ticksCount = ticksCount + 1;
-        if (Range.range(this.position, player) < 2)
-            attack(player);
+        //fix:
+//        if (Range.range(this.position, player) < 2)
+//            attack(player);
     }
 
     private boolean closeEnemy(){
-
+        //implement
+        return false;
     }
 }

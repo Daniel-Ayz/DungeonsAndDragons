@@ -54,8 +54,8 @@ public class TileFactory {
                 () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6),
                 () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
                 () -> new Rogue("Arya Stark", 150, 40, 2, 20),
-                () -> new Rogue("Bronn", 250, 35, 3, 50),
-                () -> new Hunter("Ygritte", 220, 30, 2, 6)
+                () -> new Rogue("Bronn", 250, 35, 3, 50)
+                //,() -> new Hunter("Ygritte", 220, 30, 2, 6)
         );
     }
 
@@ -64,20 +64,20 @@ public class TileFactory {
     }
 
     // TODO: Add additional callbacks of your choice
-
-    public Enemy produceEnemy(char tile, Position position, ...) {
-        return null;
-    }
-
-    public Player producePlayer(int idx, ...){
-        return null;
-    }
-
-    public Empty produceEmpty(Position position, ...){
-        return null;
-    }
-
-    public Wall produceWall(Position position, ...){
-        return null;
-    }
+//
+//    public Enemy produceEnemy(char tile, Position position, ...) {
+//        return null;
+//    }
+//
+//    public Player producePlayer(int idx, ...){
+//        return null;
+//    }
+//
+//    public Empty produceEmpty(Position position, ...){
+//        return null;
+//    }
+//
+//    public Wall produceWall(Position position, ...){
+//        return null;
+//    }
 }
