@@ -1,12 +1,37 @@
 package Business;
 
-public abstract class Enemy extends Unit{
-    protected int experienceValue;
-
-    protected Enemy(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue) {
+public class Enemy extends Unit{
+    protected Enemy(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(character, name, healthCapacity, attackPoints, defensePoints);
-        this.experienceValue = experienceValue;
     }
 
-    protected abstract void onGameTick();
+    @Override
+    protected void visit(Player p) {
+        battle(p);
+        if(p.isDead()){
+            //messages
+            p.onDeath();
+        }
+    }
+
+    @Override
+    protected void visit(Enemy e) {
+        //do nothing
+    }
+
+    @Override
+    protected void processStep() {
+
+    }
+
+    @Override
+    protected void onDeath() {
+
+    }
+
+
+    @Override
+    protected void accept(Unit unit) {
+        unit.visit(this);
+    }
 }

@@ -12,20 +12,20 @@ public abstract class Tile implements Comparable<Tile>{
         this.position=position;
     }
 
-    public char getCharacter() {
+    protected char getCharacter() {
         return character;
     }
 
-    public Position getPosition() {
+    protected Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    protected void setPosition(Position position) {
         this.position = position;
     }
-
-    public abstract void accept(Unit unit);
-
+    //abstract-------------------
+    protected abstract void accept(Unit unit);
+    //---------------------------
     @Override
     public int compareTo(Tile tile) {
         return getPosition().compareTo(tile.getPosition());

@@ -1,6 +1,7 @@
 package Business;
 
 public class Rogue extends Player{
+    protected static final int ROGUE_ATTACK_BONUS = 3;
 
     protected int cost;
     protected int currentEnergy;
@@ -11,10 +12,10 @@ public class Rogue extends Player{
         this.currentEnergy=100;
     }
 
-    protected void levelUp() throws Exception {
+    protected void levelUp() {
         super.levelUp();
         currentEnergy= 100;
-        attackPoints+=(3*(playerLevel-1));
+        attackPoints+=(ROGUE_ATTACK_BONUS*playerLevel);
     }
 
     @Override
@@ -23,9 +24,7 @@ public class Rogue extends Player{
     }
 
     @Override
-    protected void castAbility() throws Exception {
-        if(currentEnergy<cost)
-            throw new Exception("cannot cast ability has energy of: " + String.valueOf(currentEnergy));
+    protected void castAbility(){
         currentEnergy-=cost;
         //- For each enemy within range < 2, deal damage (reduce health value) equals to the rogue’s
         //attack points (each enemy will try to defend itself).

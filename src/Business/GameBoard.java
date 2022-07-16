@@ -8,23 +8,23 @@ import java.util.stream.Collectors;
 public class GameBoard {
     private List<Tile> tiles;
 
-    public GameBoard(Tile[][] board){
+    protected GameBoard(Tile[][] board){
         tiles = new ArrayList<>();
         for(Tile[] line : board){
             tiles.addAll(Arrays.asList(line));
         }
     }
 
-    public Tile get(int x, int y) {
+    protected Tile get(int x, int y) throws Exception {
         for(Tile t : tiles){
-            if (t.getPosition().equals(Position.at(x, y))){
+            if (t.getPosition().samePosition(x,y)){
                 return t;
             }
         }
-        throw new Exception("no such tile ")
+        throw new Exception("no such tile ");
     }
 
-    public void remove(Enemy e) {
+    protected void remove(Enemy e) {
         tiles.remove(e);
         Position p = e.getPosition();
         tiles.add(new Empty(p));
