@@ -1,12 +1,14 @@
-package Business;
+package Tiles.Units.Enemies;
 
-public class Trap extends Enemy{
+import Tiles.Units.Enemy;
+
+public class Trap extends Enemy {
     private int visibilityTime;
     private int invisibilityTime;
     private int ticksCount;
     private boolean visible;
 
-    protected Trap(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visibilityTime, int invisibilityTime) {
+    public Trap(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visibilityTime, int invisibilityTime) {
         super(character, name, healthCapacity, attackPoints, defensePoints, experienceValue);
         this.visibilityTime = visibilityTime;
         this.invisibilityTime = invisibilityTime;

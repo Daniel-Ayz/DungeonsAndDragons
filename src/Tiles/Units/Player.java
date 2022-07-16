@@ -1,6 +1,8 @@
-package Business;
+package Tiles.Units;
 
-public abstract class Player extends Unit{
+import Tiles.Unit;
+
+public abstract class Player extends Unit {
     protected static final char PLAYER_TILE='@';
     protected static final int REQ_EXP = 50;
     protected static final int ATTACK_BONUS = 4;
@@ -52,12 +54,12 @@ public abstract class Player extends Unit{
         enemy.onDeath();
     }
 
-    protected void onDeath(){
+    public void onDeath(){
         //messagecallback
         //ondeathcallback
     }
 
-    protected void processStep(){
+    public void processStep(){
         //to do
     }
 

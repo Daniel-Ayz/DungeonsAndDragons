@@ -1,6 +1,8 @@
-package Business;
+package Tiles.Units.Players;
 
-public class Mage extends Player{
+import Tiles.Units.Player;
+
+public class Mage extends Player {
     protected static final int MAGE_MANA_POOL_BONUS = 25;
     protected static final int MAGE_SPELL_POWER_BONUS = 10;
 
@@ -11,7 +13,7 @@ public class Mage extends Player{
     protected int hitsCount;
     protected int abilityRange;
 
-    protected Mage(String name, int healthCapacity, int attackPoints, int defensePoints, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange) {
+    public Mage(String name, int healthCapacity, int attackPoints, int defensePoints, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange) {
         super(name, healthCapacity, attackPoints, defensePoints);
         this.manaPool=manaPool;
         this.currentMana=manaPool/4;

@@ -1,12 +1,14 @@
-package Business;
+package Tiles.Units.Players;
 
-public class Rogue extends Player{
+import Tiles.Units.Player;
+
+public class Rogue extends Player {
     protected static final int ROGUE_ATTACK_BONUS = 3;
 
     protected int cost;
     protected int currentEnergy;
 
-    protected Rogue(String name, int healthCapacity, int attackPoints, int defensePoints, int cost) {
+    public Rogue(String name, int healthCapacity, int attackPoints, int defensePoints, int cost) {
         super(name, healthCapacity, attackPoints, defensePoints);
         this.cost=cost;
         this.currentEnergy=100;

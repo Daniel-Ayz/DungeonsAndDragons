@@ -1,6 +1,8 @@
-package Business;
+package Tiles.Units.Players;
 
-public class Warrior extends Player{
+import Tiles.Units.Player;
+
+public class Warrior extends Player {
     protected static final int WARRIOR_HEALTH_BONUS = 5;
     protected static final int WARRIOR_ATTACK_BONUS = 2;
     protected static final int WARRIOR_DEFENSE_BONUS = 1;
@@ -9,7 +11,7 @@ public class Warrior extends Player{
     private int remainingCooldown;
 
 
-    protected Warrior(String name, int healthCapacity, int attackPoints, int defensePoints, int abilityCooldown) {
+    public Warrior(String name, int healthCapacity, int attackPoints, int defensePoints, int abilityCooldown) {
         super(name, healthCapacity, attackPoints, defensePoints);
         this.abilityCooldown=abilityCooldown;
         this.remainingCooldown=0;

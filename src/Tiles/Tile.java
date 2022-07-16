@@ -1,4 +1,6 @@
-package Business;
+package Tiles;
+
+import Game.Position;
 
 public abstract class Tile implements Comparable<Tile>{
     protected char character;
@@ -16,7 +18,7 @@ public abstract class Tile implements Comparable<Tile>{
         return character;
     }
 
-    protected Position getPosition() {
+    public Position getPosition() {
         return position;
     }
 

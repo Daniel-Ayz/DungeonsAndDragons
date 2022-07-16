@@ -1,15 +1,18 @@
-package Business;
+package Tiles;
 
+import Game.Position;
 import Callbacks.MessageCallback;
+import Tiles.Units.Enemy;
+import Tiles.Units.Player;
 
-public abstract class Unit extends Tile{
+public abstract class Unit extends Tile {
 
-    protected String name;
-    protected Health health;
-    protected int attackPoints;
-    protected int defensePoints;
+    public String name;
+    public Health health;
+    public int attackPoints;
+    public int defensePoints;
 
-    protected Unit(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
+    public Unit(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(character);
         this.name=name;
         this.health= new Health(healthCapacity);
@@ -17,91 +20,91 @@ public abstract class Unit extends Tile{
         this.defensePoints=defensePoints;
     }
 
-    protected void swapPosition(Tile tile){
+    public void swapPosition(Tile tile){
         Position temp=this.getPosition();
         this.setPosition(tile.getPosition());
         tile.setPosition(temp);
     }
 
-    protected boolean isDead(){
+    public boolean isDead(){
         return health.healthAmount<=0;
     }
 
 
 //------------------------------------visitor--------------------------------
     // This unit attempts to interact with another tile.
-    protected void interact(Tile tile){
+    public void interact(Tile tile){
         tile.accept(this);
     }
 
-    protected void visit(Empty empty){
+    public void visit(Empty empty){
         swapPosition(empty);
     }
 
-    protected void visit(Wall wall){
+    public void visit(Wall wall){
         //do nothing
     }
 //---------------------abstract-------------------------------------------
-    protected abstract void visit(Player p);
-    protected abstract void visit(Enemy e);
+    public abstract void visit(Player p);
+    public abstract void visit(Enemy e);
     // Should be automatically called once the unit finishes its turn
-    protected abstract void processStep();
+    public abstract void processStep();
 
     // What happens when the unit dies
-    protected abstract void onDeath();
+    public abstract void onDeath();
 //--------------------------------------------------------------------------
 
 
 //-----------------------------------not implemented----------------------------
-    protected void initialize(Position position, MessageCallback messageCallback){
+    public void initialize(Position position, MessageCallback messageCallback){
 
     }
-    protected int attack(){
+    public int attack(){
         return -1;
     }
 
-    protected int defend(){
+    public int defend(){
         return -1;
     }
 
     // Combat against another unit.
-    protected void battle(Unit u){
+    public void battle(Unit u){
 
     }
 //------------------------------------------------------------------end
 
-    protected String getName(){
+    public String getName(){
         return name;
     }
 
-    protected String getDescription(){ //override it in each subclass
+    public String getDescription(){ //override it in each subclass
         return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), health.healthAmount, attackPoints, defensePoints);
     }
 
-    class Health{
-        protected int healthPool;
-        protected int healthAmount;
+    public class Health{
+        public int healthPool;
+        public int healthAmount;
 
-        protected Health(int healthPool) {
+        public Health(int healthPool) {
             this.healthPool = healthPool;
             this.healthAmount = healthPool;
         }
 
-        protected Health getHealth(){return this; }
+        public Health getHealth(){return this; }
 
-        protected void healthPoolIncrease(int amount){
+        public void healthPoolIncrease(int amount){
             healthPool+=amount;
         }
 
-        protected void healthAmountIncrease(int amount){
+        public void healthAmountIncrease(int amount){
             healthAmount+=amount;
         }
 
-        protected void maxHeal(){
+        public void maxHeal(){
             healthAmount=healthPool;
         }
 
-        protected void reduceHealth(int amountToReduce){
+        public void reduceHealth(int amountToReduce){
             healthAmount-=amountToReduce;
             //if(healthAmount<=0)
                 //onDeath

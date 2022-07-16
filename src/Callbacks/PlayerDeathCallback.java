@@ -1,6 +1,6 @@
 package Callbacks;
 
-import Business.Player;
+import Tiles.Units.Player;
 
 public interface PlayerDeathCallback {
     void call(Player p);

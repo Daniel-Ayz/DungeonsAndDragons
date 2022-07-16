@@ -1,6 +1,6 @@
 package Callbacks;
 
-import Business.Enemy;
+import Tiles.Units.Enemy;
 
 public interface EnemyDeathCallback{
     void call(Enemy e);

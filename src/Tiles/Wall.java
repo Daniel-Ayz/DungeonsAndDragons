@@ -1,6 +1,8 @@
-package Business;
+package Tiles;
 
-public class Wall extends Tile{
+import Game.Position;
+
+public class Wall extends Tile {
     private static final char CHARACTER_WALL= '#';
 
     protected Wall(Position position) {

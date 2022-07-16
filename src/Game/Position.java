@@ -1,4 +1,4 @@
-package Business;
+package Game;
 
 public class Position implements Comparable<Position> {
     private int x;

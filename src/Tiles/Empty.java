@@ -1,9 +1,11 @@
-package Business;
+package Tiles;
 
-public class Empty extends Tile{
+import Game.Position;
+
+public class Empty extends Tile {
     private static final char CHARACTER_EMPTY= '.';
 
-    protected Empty(Position position) {
+    public Empty(Position position) {
         super(CHARACTER_EMPTY);
         setPosition(position);
     }

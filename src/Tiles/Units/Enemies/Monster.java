@@ -1,11 +1,14 @@
-package Business;
+package Tiles.Units.Enemies;
+
+import Tiles.Units.Enemy;
+
 import java.util.Random;
 
 
-public class Monster extends Enemy{
+public class Monster extends Enemy {
     private int visionRange;
 
-    protected Monster(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visionRange) {
+    public Monster(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visionRange) {
         super(character, name, healthCapacity, attackPoints, defensePoints, experienceValue);
         this.visionRange = visionRange;
     }
