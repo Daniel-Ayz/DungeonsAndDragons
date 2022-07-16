@@ -7,8 +7,6 @@ public abstract class Player extends Unit{
     protected static final int DEFENSE_BONUS = 1;
     protected static final int HEALTH_BONUS = 10;
 
-
-
     protected int experience;
     protected int playerLevel;
 
@@ -44,6 +42,8 @@ public abstract class Player extends Unit{
         }
     }
     //--------------------------------------------------------------------
+
+
 
     protected void onKill(Enemy enemy){
         //int exp= enemy.getExperience();
