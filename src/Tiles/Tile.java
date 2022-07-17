@@ -10,7 +10,7 @@ public abstract class Tile implements Comparable<Tile>{
         this.character=character;
     }
 
-    protected void initialize(Position position){
+    public void initialize(Position position){
         this.position=position;
     }
 

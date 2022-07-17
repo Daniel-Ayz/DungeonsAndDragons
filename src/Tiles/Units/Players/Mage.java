@@ -24,10 +24,16 @@ public class Mage extends Player {
     }
 
     protected void levelUp() {
+        int beforeHealth= health.healthPool;
+        int beforeAttack= attackPoints;
+        int beforeDefense= defensePoints;
+        int beforeManaPool= manaPool;
+        int beforeSpellPower= spellPower;
         super.levelUp();
         manaPool+=(MAGE_MANA_POOL_BONUS*playerLevel);
         currentMana=Math.min(currentMana+(manaPool/4),manaPool);
         spellPower+=(MAGE_SPELL_POWER_BONUS*playerLevel);
+        messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +% Defense, +%d Max Mana, +%d Spell Power", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense, manaPool-beforeManaPool, spellPower-beforeSpellPower ));
     }
 
     protected void onGameTick(){

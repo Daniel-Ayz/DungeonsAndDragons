@@ -64,20 +64,22 @@ public class TileFactory {
     }
 
     // TODO: Add additional callbacks of your choice
-//
-//    public Enemy produceEnemy(char tile, Position position, ...) {
-//        return null;
-//    }
-//
-//    public Player producePlayer(int idx, ...){
-//        return null;
-//    }
-//
-//    public Empty produceEmpty(Position position, ...){
-//        return null;
-//    }
-//
-//    public Wall produceWall(Position position, ...){
-//        return null;
-//    }
+
+    public Enemy produceEnemy(char tile, Position position) {
+        Enemy e= enemiesMap.get(tile).get();
+        e.initialize(position);
+        return e;
+    }
+
+    public Player producePlayer(int idx){
+        return playersList.get(idx).get();
+    }
+
+    public Empty produceEmpty(Position position){
+        return new Empty(position);
+    }
+
+    public Wall produceWall(Position position){
+        return new Wall(position);
+    }
 }

@@ -1,9 +1,12 @@
 package Tiles;
 
+import Callbacks.PlayerDeathCallback;
 import Game.Position;
 import Callbacks.MessageCallback;
 import Tiles.Units.Enemy;
 import Tiles.Units.Player;
+
+import java.util.Random;
 
 public abstract class Unit extends Tile {
 
@@ -11,6 +14,8 @@ public abstract class Unit extends Tile {
     public Health health;
     public int attackPoints;
     public int defensePoints;
+    protected MessageCallback messageCallback;
+    Random random;
 
     public Unit(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(character);
@@ -18,6 +23,7 @@ public abstract class Unit extends Tile {
         this.health= new Health(healthCapacity);
         this.attackPoints=attackPoints;
         this.defensePoints=defensePoints;
+        this.random= new Random();
     }
 
     public void swapPosition(Tile tile){
@@ -30,6 +36,10 @@ public abstract class Unit extends Tile {
         return health.healthAmount<=0;
     }
 
+    public void initialize(Position position, MessageCallback messageCallback){
+        setPosition(position);
+        this.messageCallback=messageCallback;
+    }
 
 //------------------------------------visitor--------------------------------
     // This unit attempts to interact with another tile.
@@ -49,29 +59,30 @@ public abstract class Unit extends Tile {
     public abstract void visit(Enemy e);
     // Should be automatically called once the unit finishes its turn
     public abstract void processStep();
-
     // What happens when the unit dies
     public abstract void onDeath();
 //--------------------------------------------------------------------------
 
 
-//-----------------------------------not implemented----------------------------
-    public void initialize(Position position, MessageCallback messageCallback){
-
-    }
-    public int attack(){
-        return -1;
+    public int attackRoll(){
+        int attackRoll= random.nextInt(attackPoints+1);
+        messageCallback.send(String.format("%s rolled %d attack points", getName(), attackRoll));
+        return attackRoll;
     }
 
-    public int defend(){
-        return -1;
+    public int defenseRoll(){
+        int defenseRoll= random.nextInt(defensePoints+1);
+        messageCallback.send(String.format("%s rolled %d attack points", getName(), defenseRoll));
+        return defenseRoll;
     }
 
     // Combat against another unit.
     public void battle(Unit u){
-
+        messageCallback.send(String.format("%s engaged in combat with %s \n%s \n%s ", getName(), u.getName(), getDescription(), u.getDescription()));
+        int damage= Math.max(attackRoll()-u.defenseRoll(),0);
+        u.health.reduceHealth(damage);
+        messageCallback.send(String.format("%s dealt %d damage to %s", getName(), damage, u.getName()));
     }
-//------------------------------------------------------------------end
 
     public String getName(){
         return name;
@@ -89,8 +100,6 @@ public abstract class Unit extends Tile {
             this.healthPool = healthPool;
             this.healthAmount = healthPool;
         }
-
-        public Health getHealth(){return this; }
 
         public void healthPoolIncrease(int amount){
             healthPool+=amount;

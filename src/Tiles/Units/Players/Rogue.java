@@ -15,9 +15,13 @@ public class Rogue extends Player {
     }
 
     protected void levelUp() {
+        int beforeHealth= health.healthPool;
+        int beforeAttack= attackPoints;
+        int beforeDefense= defensePoints;
         super.levelUp();
         currentEnergy= 100;
         attackPoints+=(ROGUE_ATTACK_BONUS*playerLevel);
+        messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +% Defense", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense));
     }
 
     @Override
