@@ -1,5 +1,6 @@
 package Tiles.Units;
 
+import Callbacks.PlayerDeathCallback;
 import Tiles.Unit;
 
 public abstract class Player extends Unit {
@@ -11,6 +12,8 @@ public abstract class Player extends Unit {
 
     protected int experience;
     protected int playerLevel;
+
+    protected PlayerDeathCallback playerDeathCallback;
 
     protected Player(String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(PLAYER_TILE, name, healthCapacity, attackPoints, defensePoints);
@@ -45,18 +48,16 @@ public abstract class Player extends Unit {
     }
     //--------------------------------------------------------------------
 
-
-
     protected void onKill(Enemy enemy){
-        //int exp= enemy.getExperience();
-        //messagecallback
-        //addExperience(exp);
+        int exp= enemy.getExperienceValue();
+        messageCallback.send(String.format("%s is died. %s gained %d experience", enemy.getName(),getName(), exp));
+        addExperience(exp);
         enemy.onDeath();
     }
 
     public void onDeath(){
-        //messagecallback
-        //ondeathcallback
+        messageCallback.send("You lost.");
+        playerDeathCallback.call(this);
     }
 
     public void processStep(){

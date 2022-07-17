@@ -5,7 +5,7 @@ import Game.Position;
 public class Wall extends Tile {
     private static final char CHARACTER_WALL= '#';
 
-    protected Wall(Position position) {
+    public Wall(Position position) {
         super(CHARACTER_WALL);
         setPosition(position);
     }
