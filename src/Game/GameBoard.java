@@ -19,13 +19,13 @@ public class GameBoard {
         }
     }
 
-    protected Tile get(int x, int y) throws Exception {
+    protected Tile get(int x, int y) {
         for(Tile t : tiles){
             if (t.getPosition().samePosition(x,y)){
                 return t;
             }
         }
-        throw new Exception("no such tile ");
+        return null;
     }
 
     protected void remove(Enemy e) {

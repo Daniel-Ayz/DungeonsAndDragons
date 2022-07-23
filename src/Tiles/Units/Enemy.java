@@ -1,6 +1,8 @@
 package Tiles.Units;
 
 import Callbacks.EnemyDeathCallback;
+import Callbacks.MessageCallback;
+import Game.Position;
 import Tiles.Unit;
 
 public abstract class Enemy extends Unit {
@@ -13,13 +15,18 @@ public abstract class Enemy extends Unit {
         this.experienceValue=experienceValue;
     }
 
+    public void initialize(Position position, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback) {
+        super.initialize(position, messageCallback);
+        this.enemyDeathCallback= enemyDeathCallback;
+    }
+
     public int getExperienceValue() {
         return experienceValue;
     }
 
     @Override
     public void visit(Player p) {
-        battle(p);
+        super.battle(p);
         if(p.isDead()){
             messageCallback.send(String.format("%s killed %s.",getName(),p.getName()));
             p.onDeath();
@@ -38,7 +45,7 @@ public abstract class Enemy extends Unit {
 
     @Override
     public void onDeath() {
-        enemyDeathCallback.call(this);
+        enemyDeathCallback.call();
     }
 
     @Override

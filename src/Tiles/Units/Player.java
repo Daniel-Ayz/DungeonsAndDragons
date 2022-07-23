@@ -1,5 +1,6 @@
 package Tiles.Units;
 
+import Callbacks.EnemiesInRangeCallBack;
 import Callbacks.PlayerDeathCallback;
 import Tiles.Unit;
 
@@ -14,11 +15,16 @@ public abstract class Player extends Unit {
     protected int playerLevel;
 
     protected PlayerDeathCallback playerDeathCallback;
+    protected EnemiesInRangeCallBack enemiesInRangeCallBack;
 
     protected Player(String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(PLAYER_TILE, name, healthCapacity, attackPoints, defensePoints);
         this.experience=0;
         this.playerLevel=1;
+    }
+
+    public void setEnemiesInRangeCallBack(EnemiesInRangeCallBack callBack){
+        enemiesInRangeCallBack=callBack;
     }
 
     protected void levelUp() {
@@ -75,6 +81,11 @@ public abstract class Player extends Unit {
             levelUp();
             levelUpReq=levelUpReq();
         }
+    }
+
+    @Override
+    public String toString(){
+        return isDead() ? "X" : super.toString();
     }
 
     //--------------------------abstract--------------------------

@@ -115,8 +115,6 @@ public abstract class Unit extends Tile {
 
         public void reduceHealth(int amountToReduce){
             healthAmount-=amountToReduce;
-            //if(healthAmount<=0)
-                //onDeath
         }
 
     }

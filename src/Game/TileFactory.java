@@ -1,5 +1,6 @@
 package Game;
 
+import GUI.GUI;
 import Tiles.Units.Players.Mage;
 import Tiles.Units.Players.Rogue;
 import Tiles.Units.Players.Warrior;
@@ -21,6 +22,8 @@ public class TileFactory {
     private List<Supplier<Player>> playersList;
     private Map<Character, Supplier<Enemy>> enemiesMap;
     private Player selected;
+    private GameBoard board;
+    private GUI gui;
 
     public TileFactory(){
         playersList = initPlayers();
@@ -67,7 +70,7 @@ public class TileFactory {
 
     public Enemy produceEnemy(char tile, Position position) {
         Enemy e= enemiesMap.get(tile).get();
-        e.initialize(position);
+        e.initialize(position,(m)-> gui.print(m), ()->board.remove(e));
         return e;
     }
 
