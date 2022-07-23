@@ -1,7 +1,9 @@
 package Tiles.Units;
 
 import Callbacks.EnemiesInRangeCallBack;
+import Callbacks.GetTileCallBack;
 import Callbacks.PlayerDeathCallback;
+import Game.Action;
 import Tiles.Unit;
 
 public abstract class Player extends Unit {
@@ -16,6 +18,7 @@ public abstract class Player extends Unit {
 
     protected PlayerDeathCallback playerDeathCallback;
     protected EnemiesInRangeCallBack enemiesInRangeCallBack;
+    protected GetTileCallBack getTileCallBack;
 
     protected Player(String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(PLAYER_TILE, name, healthCapacity, attackPoints, defensePoints);
@@ -23,8 +26,9 @@ public abstract class Player extends Unit {
         this.playerLevel=1;
     }
 
-    public void setEnemiesInRangeCallBack(EnemiesInRangeCallBack callBack){
-        enemiesInRangeCallBack=callBack;
+    public void setCallBacks(EnemiesInRangeCallBack EnemiesInRangeCallBack, GetTileCallBack getTileCallBack){
+        this.enemiesInRangeCallBack=enemiesInRangeCallBack;
+        this.getTileCallBack = getTileCallBack;
     }
 
     protected void levelUp() {
@@ -54,6 +58,15 @@ public abstract class Player extends Unit {
     }
     //--------------------------------------------------------------------
 
+    protected void specialAbilityAttack(Enemy enemy){
+        int damage= Math.max(getAbilityDamage()-enemy.defenseRoll(),0);
+        enemy.health.reduceHealth(damage);
+        messageCallback.send(String.format("%s dealt %d special ability damage to %s ", getName(), damage, enemy.getName()));
+        if(enemy.isDead()){
+            onKill(enemy);
+        }
+    }
+
     protected void onKill(Enemy enemy){
         int exp= enemy.getExperienceValue();
         messageCallback.send(String.format("%s is died. %s gained %d experience", enemy.getName(),getName(), exp));
@@ -66,8 +79,26 @@ public abstract class Player extends Unit {
         playerDeathCallback.call(this);
     }
 
-    public void processStep(){
-        //to do
+    public void TakeTurn(Action action){
+        switch (action){
+            case LEFT:
+                interact(getTileCallBack.getTile(position.getX()-1, position.getY()));
+                break;
+            case RIGHT:
+                interact(getTileCallBack.getTile(position.getX()+1, position.getY()));
+                break;
+            case UP:
+                interact(getTileCallBack.getTile(position.getX(), position.getY()+1));
+                break;
+            case DOWN:
+                interact(getTileCallBack.getTile(position.getX(), position.getY()-1));
+                break;
+            case SPECIAL_ABILITY:
+                castAbility();
+                break;
+            case NONE:
+                break;
+        }
     }
 
     protected int levelUpReq(){
@@ -89,7 +120,11 @@ public abstract class Player extends Unit {
     }
 
     //--------------------------abstract--------------------------
-    protected abstract void onGameTick();
+    public abstract void onGameTick();
     protected abstract void castAbility();
+    protected abstract int getAbilityDamage();
     //------------------------------------------------------------
+    //?
+    public void processStep(){
+    }
 }

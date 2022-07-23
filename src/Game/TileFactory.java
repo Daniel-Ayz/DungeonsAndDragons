@@ -1,6 +1,6 @@
 package Game;
 
-import GUI.GUI;
+import CLI.UserInterface;
 import Tiles.Units.Players.Mage;
 import Tiles.Units.Players.Rogue;
 import Tiles.Units.Players.Warrior;
@@ -21,13 +21,23 @@ import java.util.stream.Collectors;
 public class TileFactory {
     private List<Supplier<Player>> playersList;
     private Map<Character, Supplier<Enemy>> enemiesMap;
-    private Player selected;
-    private GameBoard board;
-    private GUI gui;
 
-    public TileFactory(){
+    private Player selected;
+    private LevelManager levelManager;
+    private UserInterface ui;
+
+    public TileFactory(UserInterface ui){
         playersList = initPlayers();
         enemiesMap = initEnemies();
+        this.ui= ui;
+    }
+
+    public void setPlayer(Player player){
+        selected = player;
+    }
+
+    public void setLevelManager(LevelManager levelManager){
+        this.levelManager = levelManager;
     }
 
     private Map<Character, Supplier<Enemy>> initEnemies() {
@@ -70,7 +80,7 @@ public class TileFactory {
 
     public Enemy produceEnemy(char tile, Position position) {
         Enemy e= enemiesMap.get(tile).get();
-        e.initialize(position,(m)-> gui.print(m), ()->board.remove(e));
+        e.initialize(position,(m)-> ui.print(m), ()->levelManager.remove(e));
         return e;
     }
 

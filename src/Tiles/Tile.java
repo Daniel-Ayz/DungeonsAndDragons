@@ -10,10 +10,6 @@ public abstract class Tile implements Comparable<Tile>{
         this.character=character;
     }
 
-    public void initialize(Position position){
-        this.position=position;
-    }
-
     public char getCharacter() {
         return character;
     }

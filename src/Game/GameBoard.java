@@ -37,7 +37,15 @@ public class GameBoard {
     @Override
     public String toString() {
         tiles = tiles.stream().sorted().collect(Collectors.toList());
-        // TODO: Implement me
-        return null;
+        String board="";
+        int row=0;
+        for (Tile tile:tiles) {
+            if(tile.getPosition().getY()>row){
+                board+="\n";
+                row++;
+            }
+            board+=tile.toString();
+        }
+        return board;
     }
 }

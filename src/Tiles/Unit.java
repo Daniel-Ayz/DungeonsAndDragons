@@ -15,7 +15,7 @@ public abstract class Unit extends Tile {
     public int attackPoints;
     public int defensePoints;
     protected MessageCallback messageCallback;
-    Random random;
+    protected Random random;
 
     public Unit(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(character);

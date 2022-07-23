@@ -38,10 +38,7 @@ public abstract class Enemy extends Unit {
         //do nothing
     }
 
-    @Override
-    public void processStep() {
 
-    }
 
     @Override
     public void onDeath() {
@@ -52,4 +49,12 @@ public abstract class Enemy extends Unit {
     public void accept(Unit unit) {
         unit.visit(this);
     }
+
+    //?
+    @Override
+    public void processStep() {
+
+    }
+
+    public abstract void takeTurn(Position playerPosition);
 }

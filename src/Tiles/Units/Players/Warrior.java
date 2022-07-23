@@ -1,6 +1,9 @@
 package Tiles.Units.Players;
 
+import Tiles.Units.Enemy;
 import Tiles.Units.Player;
+
+import java.util.List;
 
 public class Warrior extends Player {
     protected static final int WARRIOR_HEALTH_BONUS = 5;
@@ -29,15 +32,36 @@ public class Warrior extends Player {
         messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +% Defense", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense));
     }
 
-    protected void onGameTick(){
-        remainingCooldown--;
+    public void onGameTick(){
+        remainingCooldown=Math.max(remainingCooldown--,0);
     }
 
     @Override
     protected void castAbility() {
-        remainingCooldown=abilityCooldown;
-        health.healthAmountIncrease(Math.min(health.healthPool, health.healthAmount+(10*defensePoints)));
-        //- Randomly hits one enemy within range < 3 for an amount equals to 10% of the warrior’s
-        //health pool
+        if(remainingCooldown>0)
+            messageCallback.send(String.format("Can't cast ability remaining cooldown: %d",remainingCooldown));
+        else{
+            int previousHP= health.healthAmount;
+            remainingCooldown=abilityCooldown;
+            health.healthAmountIncrease(Math.min(health.healthPool, health.healthAmount+(10*defensePoints)));
+            int afterHealHp= health.healthAmount;
+            messageCallback.send(String.format("%s cast Avenger's Shield, healing for %d",getName(),previousHP-afterHealHp));
+            List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(3);
+            if(!enemies.isEmpty()){
+                int randomInd=super.random.nextInt(0,enemies.size());
+                Enemy e=enemies.get(randomInd);
+                specialAbilityAttack(e);
+            }
+        }
+    }
+
+    @Override
+    protected int getAbilityDamage() {
+        return health.healthPool;
+    }
+
+    @Override
+    public String getDescription(){ //override it in each subclass
+        return String.format("%s \t\t Health: %s \t\t Attack: %d \t\t Defense: %d \t\t Experience: %d", getName(), health.healthAmount, attackPoints, defensePoints);
     }
 }

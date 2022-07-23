@@ -1,6 +1,9 @@
 package Tiles.Units.Players;
 
+import Tiles.Units.Enemy;
 import Tiles.Units.Player;
+
+import java.util.List;
 
 public class Mage extends Player {
     protected static final int MAGE_MANA_POOL_BONUS = 25;
@@ -36,19 +39,36 @@ public class Mage extends Player {
         messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +% Defense, +%d Max Mana, +%d Spell Power", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense, manaPool-beforeManaPool, spellPower-beforeSpellPower ));
     }
 
-    protected void onGameTick(){
+    public void onGameTick(){
         currentMana=Math.min(manaPool,currentMana*playerLevel);
     }
 
     @Override
     protected void castAbility() {
-        currentMana-=manaCost;
-        int hits=0;
-        while(hits<hitsCount ){ // && (∃ living enemy s.t. range(enemy, player) < ability range)
-            //- Select random enemy within ability range.
-            //- Deal damage (reduce health value) to the chosen enemy for an amount equal to spell power
-            //(each enemy may try to defend itself).
-            hits++;
+        if(currentMana<manaCost)
+            messageCallback.send(String.format("Can't cast ability, current energy: %d",currentMana));
+        else{
+            currentMana-=manaCost;
+            messageCallback.send(String.format("%s cast Blizzard.",getName()));
+            List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(abilityRange);
+            int hits=0;
+            while(hits<hitsCount & !enemies.isEmpty()){ // && (∃ living enemy s.t. range(enemy, player) < ability range)
+                int randomInd=super.random.nextInt(0,enemies.size());
+                Enemy e=enemies.get(randomInd);
+                specialAbilityAttack(e);
+                hits++;
+                enemies= enemiesInRangeCallBack.getEnemies(abilityRange);
+            }
         }
+    }
+
+    @Override
+    protected int getAbilityDamage() {
+        return spellPower;
+    }
+
+    @Override
+    public String getDescription(){ //override it in each subclass
+        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), health.healthAmount, attackPoints, defensePoints);
     }
 }

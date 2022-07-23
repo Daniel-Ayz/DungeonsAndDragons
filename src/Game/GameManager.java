@@ -7,7 +7,7 @@ public class GameManager {
     //player
 
     public GameManager(){
-        tileFactory = new TileFactory();
+        //tileFactory = new TileFactory();
     }
 
     public void playGame(){

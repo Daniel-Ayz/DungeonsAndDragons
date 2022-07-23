@@ -1,5 +1,6 @@
 package Tiles.Units.Enemies;
 
+import Game.Position;
 import Tiles.Units.Enemy;
 
 import java.util.Random;
@@ -11,6 +12,11 @@ public class Monster extends Enemy {
     public Monster(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visionRange) {
         super(character, name, healthCapacity, attackPoints, defensePoints, experienceValue);
         this.visionRange = visionRange;
+    }
+
+    public void takeTurn(Position playerPosition){
+        //if sees player -> follow him
+        //else moveRandomly()
     }
 
     protected void onGameTick(){
@@ -33,5 +39,10 @@ public class Monster extends Enemy {
             case 4:
                 break;
         }
+    }
+
+    @Override
+    public String getDescription(){ //override it in each subclass
+        return String.format("%s \t\t Health: %s \t\t Attack: %d \t\t Defense: %d \t\t Experience: %d", getName(), health.healthAmount, attackPoints, defensePoints);
     }
 }
