@@ -4,6 +4,7 @@ import Callbacks.EnemiesInRangeCallBack;
 import Callbacks.GetTileCallBack;
 import Callbacks.PlayerDeathCallback;
 import Game.Action;
+import Game.Position;
 import Tiles.Unit;
 
 public abstract class Player extends Unit {
@@ -16,9 +17,10 @@ public abstract class Player extends Unit {
     protected int experience;
     protected int playerLevel;
 
-    protected PlayerDeathCallback playerDeathCallback;
+    //do we need it?
+    //protected PlayerDeathCallback playerDeathCallback;
     protected EnemiesInRangeCallBack enemiesInRangeCallBack;
-    protected GetTileCallBack getTileCallBack;
+
 
     protected Player(String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(PLAYER_TILE, name, healthCapacity, attackPoints, defensePoints);
@@ -26,9 +28,10 @@ public abstract class Player extends Unit {
         this.playerLevel=1;
     }
 
-    public void setCallBacks(EnemiesInRangeCallBack EnemiesInRangeCallBack, GetTileCallBack getTileCallBack){
-        this.enemiesInRangeCallBack=enemiesInRangeCallBack;
-        this.getTileCallBack = getTileCallBack;
+    public void initilizeOnLevel(Position position,GetTileCallBack getTileCallBack ,EnemiesInRangeCallBack EnemiesInRangeCallBack){
+        super.initializeOnLevel(position,getTileCallBack);
+        this.enemiesInRangeCallBack= enemiesInRangeCallBack;
+        //this.playerDeathCallBack=playerDeathCallBack;
     }
 
     protected void levelUp() {
@@ -76,22 +79,22 @@ public abstract class Player extends Unit {
 
     public void onDeath(){
         messageCallback.send("You lost.");
-        playerDeathCallback.call(this);
+        //playerDeathCallback.call(this);
     }
 
     public void TakeTurn(Action action){
         switch (action){
             case LEFT:
-                interact(getTileCallBack.getTile(position.getX()-1, position.getY()));
+                moveLeft();
                 break;
             case RIGHT:
-                interact(getTileCallBack.getTile(position.getX()+1, position.getY()));
+                moveRight();
                 break;
             case UP:
-                interact(getTileCallBack.getTile(position.getX(), position.getY()+1));
+                moveUp();
                 break;
             case DOWN:
-                interact(getTileCallBack.getTile(position.getX(), position.getY()-1));
+                moveDown();
                 break;
             case SPECIAL_ABILITY:
                 castAbility();

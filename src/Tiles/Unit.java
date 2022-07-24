@@ -1,5 +1,6 @@
 package Tiles;
 
+import Callbacks.GetTileCallBack;
 import Callbacks.PlayerDeathCallback;
 import Game.Position;
 import Callbacks.MessageCallback;
@@ -14,7 +15,10 @@ public abstract class Unit extends Tile {
     public Health health;
     public int attackPoints;
     public int defensePoints;
+
     protected MessageCallback messageCallback;
+    protected GetTileCallBack getTileCallBack;
+
     protected Random random;
 
     public Unit(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
@@ -36,9 +40,29 @@ public abstract class Unit extends Tile {
         return health.healthAmount<=0;
     }
 
-    public void initialize(Position position, MessageCallback messageCallback){
+    public void initializeOnLevel(Position position, GetTileCallBack getTileCallBack){
         setPosition(position);
+        this.getTileCallBack=getTileCallBack;
+    }
+
+    public void initializeMessageCallBack(MessageCallback messageCallback){
         this.messageCallback=messageCallback;
+    }
+
+    protected void moveLeft(){
+        interact(getTileCallBack.getTile(position.getX()-1, position.getY()));
+    }
+
+    protected void moveRight(){
+        interact(getTileCallBack.getTile(position.getX()+1, position.getY()));
+    }
+
+    protected void moveUp(){
+        interact(getTileCallBack.getTile(position.getX(), position.getY()-1));
+    }
+
+    protected void moveDown(){
+        interact(getTileCallBack.getTile(position.getX(), position.getY()+1));
     }
 
 //------------------------------------visitor--------------------------------

@@ -26,7 +26,7 @@ public class Position implements Comparable<Position> {
             return 1;
     }
 
-    protected int range(Position position){
+    public int range(Position position){
         return (int) Math.sqrt(Math.pow(this.getX()-position.getX(),2)+Math.pow(this.getY()-position.getY(),2));
     }
 

@@ -76,16 +76,18 @@ public class TileFactory {
         return playersList.stream().map(Supplier::get).collect(Collectors.toList());
     }
 
-    // TODO: Add additional callbacks of your choice
 
     public Enemy produceEnemy(char tile, Position position) {
         Enemy e= enemiesMap.get(tile).get();
-        e.initialize(position,(m)-> ui.print(m), ()->levelManager.remove(e));
+        e.initializeMessageCallBack((m)-> ui.print(m));
+        e.initializeOnLevel(position, (x,y)->levelManager.get(x,y),()->levelManager.remove(e));
         return e;
     }
 
     public Player producePlayer(int idx){
-        return playersList.get(idx).get();
+        Player p= playersList.get(idx).get();
+        p.initializeMessageCallBack((m)-> ui.print(m));
+        return p;
     }
 
     public Empty produceEmpty(Position position){

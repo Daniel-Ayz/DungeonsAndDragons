@@ -1,6 +1,7 @@
 package Tiles.Units;
 
 import Callbacks.EnemyDeathCallback;
+import Callbacks.GetTileCallBack;
 import Callbacks.MessageCallback;
 import Game.Position;
 import Tiles.Unit;
@@ -8,6 +9,7 @@ import Tiles.Unit;
 public abstract class Enemy extends Unit {
 
     protected int experienceValue;
+
     protected EnemyDeathCallback enemyDeathCallback;
 
     protected Enemy(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue) {
@@ -15,8 +17,8 @@ public abstract class Enemy extends Unit {
         this.experienceValue=experienceValue;
     }
 
-    public void initialize(Position position, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback) {
-        super.initialize(position, messageCallback);
+    public void initializeOnLevel(Position position, GetTileCallBack getTileCallBack, EnemyDeathCallback enemyDeathCallback) {
+        super.initializeOnLevel(position, getTileCallBack);
         this.enemyDeathCallback= enemyDeathCallback;
     }
 

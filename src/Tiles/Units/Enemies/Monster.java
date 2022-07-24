@@ -15,28 +15,50 @@ public class Monster extends Enemy {
     }
 
     public void takeTurn(Position playerPosition){
-        //if sees player -> follow him
-        //else moveRandomly()
+        if(position.range(playerPosition)<visionRange){
+            int dx= position.getX()-playerPosition.getX();
+            int dy= position.getY()-playerPosition.getX();
+            if(Math.abs(dx)>Math.abs(dy)){
+                if(dx>0)
+                    moveLeft();
+                else
+                    moveRight();
+            }
+            else{
+                if(dy>0)
+                    moveUp();
+                else
+                    moveDown();
+            }
+        }
+        else
+            moveRandomly();
     }
 
+
+    //?
     protected void onGameTick(){
 
     }
 
     private void moveRandomly(){
-        Random rand = new Random();
-        int randomMove = rand.nextInt(5);
+        int randomMove = random.nextInt(5);
 
         switch (randomMove){
             case 0:
+                //do nothing
                 break;
             case 1:
+                moveLeft();
                 break;
             case 2:
+                moveRight();
                 break;
             case 3:
+                moveUp();
                 break;
             case 4:
+                moveDown();
                 break;
         }
     }

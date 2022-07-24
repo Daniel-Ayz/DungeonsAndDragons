@@ -2,6 +2,7 @@ package Tiles.Units.Enemies;
 
 import Game.Position;
 import Tiles.Units.Enemy;
+import Tiles.Units.Player;
 
 public class Trap extends Enemy {
     private static final char CHARACTER_EMPTY= '.';
@@ -20,16 +21,17 @@ public class Trap extends Enemy {
 
     public void takeTurn(Position playerPosition){
         //if player in range attack him!
+        if(position.range(playerPosition)<2)
+            interact(getTileCallBack.getTile(playerPosition.getX(),playerPosition.getY()));
+
         visible = ticksCount < visibilityTime;
         if (ticksCount == (visibilityTime + invisibilityTime))
             ticksCount = 0;
         else
             ticksCount = ticksCount + 1;
-        //fix:
-//        if (Range.range(this.position, player) < 2)
-//            attack(player);
     }
 
+    //what's this?
     private boolean closeEnemy(){
         //implement
         return false;
