@@ -18,6 +18,7 @@ public class Boss extends Monster implements HeroicUnit {
         this.combatTicks=0;
     }
 
+    //Who will set this? and how?
     public void setGetPlayerCallBack(GetPlayerCallBack getPlayerCallBack) {
         this.getPlayerCallBack = getPlayerCallBack;
     }
