@@ -37,7 +37,7 @@ public class Warrior extends Player {
     }
 
     @Override
-    protected void castAbility() {
+    public void castAbility() {
         if(remainingCooldown>0)
             messageCallback.send(String.format("Can't cast ability remaining cooldown: %d",remainingCooldown));
         else{

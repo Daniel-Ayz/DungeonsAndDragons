@@ -2,12 +2,13 @@ package Tiles.Units.Enemies;
 
 import Game.Position;
 import Tiles.Units.Enemy;
+import Tiles.Units.Player;
 
 import java.util.Random;
 
 
 public class Monster extends Enemy {
-    private int visionRange;
+    protected int visionRange;
 
     public Monster(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visionRange) {
         super(character, name, healthCapacity, attackPoints, defensePoints, experienceValue);
@@ -15,22 +16,8 @@ public class Monster extends Enemy {
     }
 
     public void takeTurn(Position playerPosition){
-        if(position.range(playerPosition)<visionRange){
-            int dx= position.getX()-playerPosition.getX();
-            int dy= position.getY()-playerPosition.getX();
-            if(Math.abs(dx)>Math.abs(dy)){
-                if(dx>0)
-                    moveLeft();
-                else
-                    moveRight();
-            }
-            else{
-                if(dy>0)
-                    moveUp();
-                else
-                    moveDown();
-            }
-        }
+        if(position.range(playerPosition)<visionRange)
+            moveTowardsPlayer(playerPosition);
         else
             moveRandomly();
     }
@@ -41,7 +28,24 @@ public class Monster extends Enemy {
 
     }
 
-    private void moveRandomly(){
+    protected void moveTowardsPlayer(Position playerPosition){
+        int dx= position.getX()-playerPosition.getX();
+        int dy= position.getY()-playerPosition.getX();
+        if(Math.abs(dx)>Math.abs(dy)){
+            if(dx>0)
+                moveLeft();
+            else
+                moveRight();
+        }
+        else{
+            if(dy>0)
+                moveUp();
+            else
+                moveDown();
+        }
+    }
+
+    protected void moveRandomly(){
         int randomMove = random.nextInt(5);
 
         switch (randomMove){

@@ -34,7 +34,7 @@ public class Rogue extends Player {
     }
 
     @Override
-    protected void castAbility(){
+    public void castAbility(){
         if(currentEnergy<cost)
             messageCallback.send(String.format("Can't cast ability, current energy: %d",currentEnergy));
         else{

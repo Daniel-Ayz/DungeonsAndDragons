@@ -7,7 +7,7 @@ import Game.Action;
 import Game.Position;
 import Tiles.Unit;
 
-public abstract class Player extends Unit {
+public abstract class Player extends Unit implements HeroicUnit{
     protected static final char PLAYER_TILE='@';
     protected static final int REQ_EXP = 50;
     protected static final int ATTACK_BONUS = 4;
@@ -124,7 +124,7 @@ public abstract class Player extends Unit {
 
     //--------------------------abstract--------------------------
     public abstract void onGameTick();
-    protected abstract void castAbility();
+    public abstract void castAbility();
     protected abstract int getAbilityDamage();
     //------------------------------------------------------------
     //?

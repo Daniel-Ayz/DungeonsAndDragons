@@ -20,7 +20,6 @@ public class Trap extends Enemy {
     }
 
     public void takeTurn(Position playerPosition){
-        //if player in range attack him!
         if(position.range(playerPosition)<2)
             interact(getTileCallBack.getTile(playerPosition.getX(),playerPosition.getY()));
 
@@ -29,12 +28,6 @@ public class Trap extends Enemy {
             ticksCount = 0;
         else
             ticksCount = ticksCount + 1;
-    }
-
-    //what's this?
-    private boolean closeEnemy(){
-        //implement
-        return false;
     }
 
     @Override

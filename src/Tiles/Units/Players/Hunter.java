@@ -47,7 +47,7 @@ public class Hunter extends Player {
     }
 
     @Override
-    protected void castAbility(){
+    public void castAbility(){
         List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(shootingRange+1);
         if(arrowsCount<=0)
             messageCallback.send(String.format("%s Can't cast ability, no arrows",getName()));

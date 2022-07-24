@@ -44,7 +44,7 @@ public class Mage extends Player {
     }
 
     @Override
-    protected void castAbility() {
+    public void castAbility() {
         if(currentMana<manaCost)
             messageCallback.send(String.format("Can't cast ability, current energy: %d",currentMana));
         else{
