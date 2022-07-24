@@ -29,7 +29,7 @@ public class Warrior extends Player {
         health.healthPoolIncrease(WARRIOR_HEALTH_BONUS*playerLevel);
         attackPoints+=WARRIOR_ATTACK_BONUS*playerLevel;
         defensePoints+=WARRIOR_DEFENSE_BONUS*playerLevel;
-        messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +% Defense", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense));
+        messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +%d Defense", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense));
     }
 
     public void onGameTick(){
@@ -62,6 +62,6 @@ public class Warrior extends Player {
 
     @Override
     public String getDescription(){ //override it in each subclass
-        return String.format("%s \t\t Health: %s \t\t Attack: %d \t\t Defense: %d \t\t Experience: %d", getName(), health.healthAmount, attackPoints, defensePoints);
+        return String.format("%s \t\t Health: %d/%d \t\t Attack: %d \t\t Defense: %d \t\t Level: %d \t\t Experience: %d/%d Cooldown: %d/%d ", getName(), health.healthAmount, health.healthPool, attackPoints, defensePoints, playerLevel, experience,levelUpReq(), remainingCooldown,abilityCooldown);
     }
 }

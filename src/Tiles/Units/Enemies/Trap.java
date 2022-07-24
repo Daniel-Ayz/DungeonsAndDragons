@@ -44,6 +44,6 @@ public class Trap extends Enemy {
 
     @Override
     public String getDescription(){ //override it in each subclass
-        return String.format("%s \t\t Health: %s \t\t Attack: %d \t\t Defense: %d \t\t Experience: %d", getName(), health.healthAmount, attackPoints, defensePoints);
+        return String.format("%s \t\t Health: %d/%d \t\t Attack: %d \t\t Defense: %d \t\t Experience Value: %d ", getName(), health.healthAmount, health.healthPool, attackPoints, defensePoints, experienceValue);
     }
 }

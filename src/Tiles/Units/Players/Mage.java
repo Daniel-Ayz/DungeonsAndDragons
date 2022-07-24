@@ -36,7 +36,7 @@ public class Mage extends Player {
         manaPool+=(MAGE_MANA_POOL_BONUS*playerLevel);
         currentMana=Math.min(currentMana+(manaPool/4),manaPool);
         spellPower+=(MAGE_SPELL_POWER_BONUS*playerLevel);
-        messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +% Defense, +%d Max Mana, +%d Spell Power", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense, manaPool-beforeManaPool, spellPower-beforeSpellPower ));
+        messageCallback.send(String.format("%s Leveled up to level: %d. gained +%d Health, +%d Attack, +%d Defense, +%d Max Mana, +%d Spell Power", name ,playerLevel , health.healthPool-beforeHealth, attackPoints-beforeAttack, defensePoints-beforeDefense, manaPool-beforeManaPool, spellPower-beforeSpellPower ));
     }
 
     public void onGameTick(){
@@ -69,6 +69,6 @@ public class Mage extends Player {
 
     @Override
     public String getDescription(){ //override it in each subclass
-        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), health.healthAmount, attackPoints, defensePoints);
+        return String.format("%s \t\t Health: %d/%d \t\t Attack: %d \t\t Defense: %d \t\t Level: %d \t\t Experience: %d/%d \t\t Mana: %d/%d \t\t SpellPower: %d ", getName(), health.healthAmount, health.healthPool, attackPoints, defensePoints, playerLevel, experience,levelUpReq(),currentMana,manaPool,spellPower);
     }
 }
