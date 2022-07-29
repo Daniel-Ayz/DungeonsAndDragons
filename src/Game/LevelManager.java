@@ -38,12 +38,12 @@ public class LevelManager {
     public boolean playLevel(){
         while(!player.isDead() && !enemies.isEmpty()){
             ui.print(player.getDescription());
+            ui.print(board.toString());
             player.TakeTurn(ui.getAction());
             player.onGameTick(); // regen the ability
             for (Enemy e:enemies) {
                 e.takeTurn(player.getPosition());
             }
-            ui.print(board.toString());
         }
         return !player.isDead();
     }

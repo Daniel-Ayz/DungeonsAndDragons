@@ -12,11 +12,8 @@ import java.util.stream.Collectors;
 public class GameBoard {
     private List<Tile> tiles;
 
-    protected GameBoard(Tile[][] board){
-        tiles = new ArrayList<>();
-        for(Tile[] line : board){
-            tiles.addAll(Arrays.asList(line));
-        }
+    protected GameBoard(List<Tile> board){
+        tiles = board;
     }
 
     protected Tile get(int x, int y) {
@@ -40,7 +37,7 @@ public class GameBoard {
         String board="";
         int row=0;
         for (Tile tile:tiles) {
-            if(tile.getPosition().getY()>row){
+            if(tile.getPosition().getX()>row){
                 board+="\n";
                 row++;
             }
