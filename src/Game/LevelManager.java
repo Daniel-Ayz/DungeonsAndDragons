@@ -14,7 +14,11 @@ public class LevelManager {
     protected Player player;
     protected UserInterface ui;
 
-    public LevelManager(Player player,Position playerPosition, GameBoard board, List<Enemy> enemies, UserInterface ui){
+    public LevelManager(){
+
+    }
+
+    public void SetLevelManager(Player player,Position playerPosition, GameBoard board, List<Enemy> enemies, UserInterface ui){
         this.board= board;
         this.enemies = enemies;
         this.player = player;
@@ -36,14 +40,16 @@ public class LevelManager {
     }
 
     public boolean playLevel(){
+        ui.print(board.toString());
+        ui.print(player.getDescription());
         while(!player.isDead() && !enemies.isEmpty()){
-            ui.print(player.getDescription());
-            ui.print(board.toString());
             player.TakeTurn(ui.getAction());
             player.onGameTick(); // regen the ability
             for (Enemy e:enemies) {
                 e.takeTurn(player.getPosition());
             }
+            ui.print(board.toString());
+            ui.print(player.getDescription());
         }
         return !player.isDead();
     }

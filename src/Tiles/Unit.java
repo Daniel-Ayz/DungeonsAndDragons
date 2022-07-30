@@ -133,6 +133,10 @@ public abstract class Unit extends Tile {
             healthAmount+=amount;
         }
 
+        public void setHealthAmount(int amount){
+            healthAmount=amount;
+        }
+
         public void maxHeal(){
             healthAmount=healthPool;
         }

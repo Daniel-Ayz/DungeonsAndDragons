@@ -37,7 +37,7 @@ public class GameBoard {
         String board="";
         int row=0;
         for (Tile tile:tiles) {
-            if(tile.getPosition().getX()>row){
+            if(tile.getPosition().getY()>row){
                 board+="\n";
                 row++;
             }

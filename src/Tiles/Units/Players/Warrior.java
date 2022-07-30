@@ -33,7 +33,7 @@ public class Warrior extends Player {
     }
 
     public void onGameTick(){
-        remainingCooldown=Math.max(remainingCooldown--,0);
+        remainingCooldown=Math.max(remainingCooldown-1,0);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class Warrior extends Player {
             messageCallback.send(String.format("Can't cast ability remaining cooldown: %d",remainingCooldown));
         else{
             int previousHP= health.healthAmount;
-            remainingCooldown=abilityCooldown;
-            health.healthAmountIncrease(Math.min(health.healthPool, health.healthAmount+(10*defensePoints)));
+            remainingCooldown=abilityCooldown+1;
+            health.setHealthAmount(Math.min(health.healthPool, health.healthAmount+(10*defensePoints)));
             int afterHealHp= health.healthAmount;
             messageCallback.send(String.format("%s cast Avenger's Shield, healing for %d",getName(),previousHP-afterHealHp));
             List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(3);

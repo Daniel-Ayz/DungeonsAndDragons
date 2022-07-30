@@ -30,7 +30,7 @@ public class Monster extends Enemy {
 
     protected void moveTowardsPlayer(Position playerPosition){
         int dx= position.getX()-playerPosition.getX();
-        int dy= position.getY()-playerPosition.getX();
+        int dy= position.getY()-playerPosition.getY();
         if(Math.abs(dx)>Math.abs(dy)){
             if(dx>0)
                 moveLeft();

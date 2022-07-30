@@ -57,23 +57,27 @@ public class GameManager {
         List<Tile> tiles = new ArrayList<Tile>();
         List<Enemy> enemies = new ArrayList<Enemy>();
         Position playerPosition = new Position(0,0);
-        for (int i = 0; i < level.size(); i++){
-            for (int j = 0; j < level.get(0).length(); j++){
-                switch (level.get(i).charAt(j)){
+
+        LevelManager levelManager=new LevelManager();
+        tileFactory.setLevelManager(levelManager);
+
+        for (int y = 0; y < level.size(); y++){
+            for (int x = 0; x < level.get(0).length(); x++){
+                switch (level.get(y).charAt(x)){
                     case '.':
-                        Empty empty = tileFactory.produceEmpty(new Position(i, j));
+                        Empty empty = tileFactory.produceEmpty(new Position(x, y));
                         tiles.add(empty);
                         break;
                     case '#':
-                        Wall wall = tileFactory.produceWall(new Position(i, j));
+                        Wall wall = tileFactory.produceWall(new Position(x, y));
                         tiles.add(wall);
                         break;
                     case '@':
-                        playerPosition = new Position(i, j);
+                        playerPosition = new Position(x, y);
                         tiles.add(player);
                         break;
                     default:
-                        Enemy enemy = tileFactory.produceEnemy(level.get(i).charAt(j), new Position(i, j));
+                        Enemy enemy = tileFactory.produceEnemy(level.get(y).charAt(x), new Position(x, y));
                         tiles.add(enemy);
                         enemies.add(enemy);
                         break;
@@ -81,7 +85,8 @@ public class GameManager {
             }
         }
 
-        return new LevelManager(player, playerPosition, new GameBoard(tiles), enemies, ui);
+        levelManager.SetLevelManager(player, playerPosition, new GameBoard(tiles), enemies, ui);
+        return levelManager;
     }
 
     public void playGame(){

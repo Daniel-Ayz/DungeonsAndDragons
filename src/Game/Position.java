@@ -20,7 +20,7 @@ public class Position implements Comparable<Position> {
     public int compareTo(Position position) {
         if(this.getX() == position.getX() && this.getY() == position.getY())
             return 0;
-        if(this.x < position.getX() || (this.x == position.getX() && this.y < position.getY()))
+        if(this.getY() < position.getY() || (this.getY() == position.getY() && this.getX() < position.getX()))
             return -1;
         else
             return 1;

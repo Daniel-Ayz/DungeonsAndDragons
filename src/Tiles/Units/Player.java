@@ -28,7 +28,7 @@ public abstract class Player extends Unit implements HeroicUnit{
         this.playerLevel=1;
     }
 
-    public void initilizeOnLevel(Position position,GetTileCallBack getTileCallBack ,EnemiesInRangeCallBack EnemiesInRangeCallBack){
+    public void initilizeOnLevel(Position position,GetTileCallBack getTileCallBack ,EnemiesInRangeCallBack enemiesInRangeCallBack){
         super.initializeOnLevel(position,getTileCallBack);
         this.enemiesInRangeCallBack= enemiesInRangeCallBack;
         //this.playerDeathCallBack=playerDeathCallBack;
