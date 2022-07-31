@@ -52,11 +52,6 @@ public abstract class Enemy extends Unit {
         unit.visit(this);
     }
 
-    //?
-    @Override
-    public void processStep() {
-
-    }
 
     public abstract void takeTurn(Position playerPosition);
 }

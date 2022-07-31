@@ -1,7 +1,6 @@
 package Tiles;
 
 import Callbacks.GetTileCallBack;
-import Callbacks.PlayerDeathCallback;
 import Game.Position;
 import Callbacks.MessageCallback;
 import Tiles.Units.Enemy;
@@ -82,8 +81,6 @@ public abstract class Unit extends Tile implements Visitor {
 //---------------------abstract-------------------------------------------
     public abstract void visit(Player p);
     public abstract void visit(Enemy e);
-    // Should be automatically called once the unit finishes its turn
-    public abstract void processStep();
     // What happens when the unit dies
     public abstract void onDeath();
 //--------------------------------------------------------------------------
