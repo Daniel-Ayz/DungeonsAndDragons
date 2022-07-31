@@ -97,5 +97,7 @@ public class GameManager {
             LevelManager level = startLevel(levelsList.get(i));
             isAlive = level.playLevel();
         }
+        if(isAlive)
+            ui.print("GG WP");
     }
 }
