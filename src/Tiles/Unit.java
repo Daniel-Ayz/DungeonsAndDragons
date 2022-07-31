@@ -96,7 +96,7 @@ public abstract class Unit extends Tile {
 
     public int defenseRoll(){
         int defenseRoll= random.nextInt(defensePoints+1);
-        messageCallback.send(String.format("%s rolled %d attack points", getName(), defenseRoll));
+        messageCallback.send(String.format("%s rolled %d defense points", getName(), defenseRoll));
         return defenseRoll;
     }
 
