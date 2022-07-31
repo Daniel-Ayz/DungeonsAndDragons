@@ -1,6 +1,7 @@
 package Tiles;
 
 import Game.Position;
+import VisitorPattern.Visited;
 
 public class Empty extends Tile {
     private static final char CHARACTER_EMPTY= '.';
@@ -11,7 +12,7 @@ public class Empty extends Tile {
     }
 
     @Override
-    protected void accept(Unit unit) {
+    public void accept(Unit unit) {
         unit.visit(this);
     }
 }

@@ -44,7 +44,7 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
 
     //------------------------------------visitor--------------------------------
-    protected void accept(Unit unit){
+    public void accept(Unit unit){
         unit.visit(this);
     }
 
