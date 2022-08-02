@@ -45,7 +45,7 @@ public class Warrior extends Player {
             remainingCooldown=abilityCooldown+1;
             health.setHealthAmount(Math.min(health.healthPool, health.healthAmount+(10*defensePoints)));
             int afterHealHp= health.healthAmount;
-            messageCallback.send(String.format("%s cast Avenger's Shield, healing for %d",getName(),previousHP-afterHealHp));
+            messageCallback.send(String.format("%s cast Avenger's Shield, healing for %d",getName(),afterHealHp-previousHP));
             List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(3);
             if(!enemies.isEmpty()){
                 int randomInd=super.random.nextInt(0,enemies.size());
