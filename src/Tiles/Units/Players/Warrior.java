@@ -1,5 +1,6 @@
 package Tiles.Units.Players;
 
+import Tiles.ConstantGenerator;
 import Tiles.Units.Enemy;
 import Tiles.Units.Player;
 
@@ -18,6 +19,16 @@ public class Warrior extends Player {
         super(name, healthCapacity, attackPoints, defensePoints);
         this.abilityCooldown=abilityCooldown;
         this.remainingCooldown=0;
+    }
+
+    public Warrior constantWarrior(){
+        Warrior warrior = new Warrior(this.name, this.health.healthPool, this.attackPoints, this.defensePoints, this.abilityCooldown);
+        warrior.generator = new ConstantGenerator();
+        return warrior;
+    }
+
+    public int getRemainingCooldown(){
+        return this.remainingCooldown;
     }
 
     protected void levelUp() {
@@ -48,7 +59,7 @@ public class Warrior extends Player {
             messageCallback.send(String.format("%s cast Avenger's Shield, healing for %d",getName(),afterHealHp-previousHP));
             List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(3);
             if(!enemies.isEmpty()){
-                int randomInd=super.random.nextInt(0,enemies.size());
+                int randomInd=super.generator.generate(enemies.size());
                 Enemy e=enemies.get(randomInd);
                 specialAbilityAttack(e);
             }

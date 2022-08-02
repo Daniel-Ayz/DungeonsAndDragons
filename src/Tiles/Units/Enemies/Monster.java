@@ -1,6 +1,7 @@
 package Tiles.Units.Enemies;
 
 import Game.Position;
+import Tiles.ConstantGenerator;
 import Tiles.Units.Enemy;
 import Tiles.Units.Player;
 
@@ -13,6 +14,13 @@ public class Monster extends Enemy {
     public Monster(char character, String name, int healthCapacity, int attackPoints, int defensePoints, int experienceValue, int visionRange) {
         super(character, name, healthCapacity, attackPoints, defensePoints, experienceValue);
         this.visionRange = visionRange;
+
+    }
+
+    public Monster constantMonster(){
+        Monster monster = new Monster(this.character, this.name, this.health.healthPool, this.attackPoints, this.defensePoints, this.experienceValue, this.visionRange);
+        monster.generator = new ConstantGenerator();
+        return monster;
     }
 
     public void takeTurn(Position playerPosition){
@@ -46,7 +54,7 @@ public class Monster extends Enemy {
     }
 
     protected void moveRandomly(){
-        int randomMove = random.nextInt(5);
+        int randomMove = generator.generate(5);
 
         switch (randomMove){
             case 0:

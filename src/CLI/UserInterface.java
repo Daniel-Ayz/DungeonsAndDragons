@@ -1,7 +1,6 @@
 package CLI;
 
 import Game.Action;
-import Game.PlayerChoice;
 
 import java.util.Scanner;
 

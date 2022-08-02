@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class GameBoard {
     private List<Tile> tiles;
 
-    protected GameBoard(List<Tile> board){
+    public GameBoard(List<Tile> board){
         tiles = board;
     }
 

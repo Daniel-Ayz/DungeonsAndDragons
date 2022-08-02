@@ -6,6 +6,8 @@ import Game.Action;
 import Game.Position;
 import Tiles.Unit;
 
+import java.util.List;
+
 public abstract class Player extends Unit implements HeroicUnit{
     protected static final char PLAYER_TILE='@';
     protected static final int REQ_EXP = 50;
@@ -23,6 +25,17 @@ public abstract class Player extends Unit implements HeroicUnit{
         super(PLAYER_TILE, name, healthCapacity, attackPoints, defensePoints);
         this.experience=0;
         this.playerLevel=1;
+    }
+
+    public List<Enemy> getEnemiesInRange(int range){
+        return enemiesInRangeCallBack.getEnemies(range);
+    }
+    public int getPlayerLevel(){
+        return this.playerLevel;
+    }
+
+    public int getAttackPoints(){
+        return this.attackPoints;
     }
 
     public void initilizeOnLevel(Position position,GetTileCallBack getTileCallBack ,EnemiesInRangeCallBack enemiesInRangeCallBack){

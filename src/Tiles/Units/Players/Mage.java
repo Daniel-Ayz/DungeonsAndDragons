@@ -1,5 +1,7 @@
 package Tiles.Units.Players;
 
+import Tiles.ConstantGenerator;
+import Tiles.Units.Enemies.Monster;
 import Tiles.Units.Enemy;
 import Tiles.Units.Player;
 
@@ -24,6 +26,16 @@ public class Mage extends Player {
         this.spellPower=spellPower;
         this.hitsCount=hitsCount;
         this.abilityRange=abilityRange;
+    }
+
+    public Mage constantMage(){
+        Mage mage = new Mage(this.name, this.health.healthPool, this.attackPoints, this.defensePoints, this.manaPool, this.manaCost, this.spellPower, this.hitsCount, this.abilityRange);
+        mage.generator = new ConstantGenerator();
+        return mage;
+    }
+
+    public int getCurrentMana(){
+        return this.currentMana;
     }
 
     protected void levelUp() {
@@ -53,7 +65,7 @@ public class Mage extends Player {
             List<Enemy> enemies= enemiesInRangeCallBack.getEnemies(abilityRange);
             int hits=0;
             while(hits<hitsCount & !enemies.isEmpty()){ // && (∃ living enemy s.t. range(enemy, player) < ability range)
-                int randomInd=super.random.nextInt(0,enemies.size());
+                int randomInd=super.generator.generate(enemies.size());
                 Enemy e=enemies.get(randomInd);
                 specialAbilityAttack(e);
                 hits++;

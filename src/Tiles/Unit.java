@@ -19,7 +19,7 @@ public abstract class Unit extends Tile implements Visitor {
     protected MessageCallback messageCallback;
     protected GetTileCallBack getTileCallBack;
 
-    protected Random random;
+    public Generator generator;
 
     public Unit(char character, String name, int healthCapacity, int attackPoints, int defensePoints) {
         super(character);
@@ -27,7 +27,7 @@ public abstract class Unit extends Tile implements Visitor {
         this.health= new Health(healthCapacity);
         this.attackPoints=attackPoints;
         this.defensePoints=defensePoints;
-        this.random= new Random();
+        this.generator = new RandomGenerator();
     }
 
     public void swapPosition(Tile tile){
@@ -87,13 +87,13 @@ public abstract class Unit extends Tile implements Visitor {
 
 
     public int attackRoll(){
-        int attackRoll= random.nextInt(attackPoints+1);
+        int attackRoll= generator.generate(attackPoints+1);
         messageCallback.send(String.format("%s rolled %d attack points", getName(), attackRoll));
         return attackRoll;
     }
 
     public int defenseRoll(){
-        int defenseRoll= random.nextInt(defensePoints+1);
+        int defenseRoll= generator.generate(defensePoints+1);
         messageCallback.send(String.format("%s rolled %d defense points", getName(), defenseRoll));
         return defenseRoll;
     }

@@ -18,6 +18,10 @@ public class Rogue extends Player {
         this.currentEnergy=ROGUE_MAX_ENERGY;
     }
 
+    public int getCurrentEnergy(){
+        return this.currentEnergy;
+    }
+
     protected void levelUp() {
         int beforeHealth= health.healthPool;
         int beforeAttack= attackPoints;
