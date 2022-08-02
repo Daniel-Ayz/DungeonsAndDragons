@@ -83,6 +83,8 @@ public class TileFactory {
         Enemy e= enemiesMap.get(tile).get();
         e.initializeMessageCallBack((m)-> ui.print(m));
         e.initializeOnLevel(position, (x,y)->levelManager.get(x,y),()->levelManager.remove(e));
+        if(tile == 'M' || tile == 'C' || tile=='K')
+            ((Boss)e).setGetPlayerCallBack(()->selected);
         return e;
     }
 

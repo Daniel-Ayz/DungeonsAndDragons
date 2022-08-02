@@ -2,7 +2,6 @@ package Tiles.Units;
 
 import Callbacks.EnemiesInRangeCallBack;
 import Callbacks.GetTileCallBack;
-import Callbacks.PlayerDeathCallback;
 import Game.Action;
 import Game.Position;
 import Tiles.Unit;
@@ -19,8 +18,6 @@ public abstract class Player extends Unit implements HeroicUnit{
     protected int experience;
     protected int playerLevel;
 
-    //do we need it?
-    //protected PlayerDeathCallback playerDeathCallback;
     protected EnemiesInRangeCallBack enemiesInRangeCallBack;
 
 
@@ -44,7 +41,6 @@ public abstract class Player extends Unit implements HeroicUnit{
     public void initilizeOnLevel(Position position,GetTileCallBack getTileCallBack ,EnemiesInRangeCallBack enemiesInRangeCallBack){
         super.initializeOnLevel(position,getTileCallBack);
         this.enemiesInRangeCallBack= enemiesInRangeCallBack;
-        //this.playerDeathCallBack=playerDeathCallBack;
     }
 
     protected void levelUp() {
@@ -57,7 +53,7 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
 
     //------------------------------------visitor--------------------------------
-    protected void accept(Unit unit){
+    public void accept(Unit unit){
         unit.visit(this);
     }
 
@@ -92,7 +88,6 @@ public abstract class Player extends Unit implements HeroicUnit{
 
     public void onDeath(){
         messageCallback.send("You lost.");
-        //playerDeathCallback.call(this);
     }
 
     public void TakeTurn(Action action){
@@ -140,7 +135,5 @@ public abstract class Player extends Unit implements HeroicUnit{
     public abstract void castAbility();
     protected abstract int getAbilityDamage();
     //------------------------------------------------------------
-    //?
-    public void processStep(){
-    }
+
 }

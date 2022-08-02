@@ -26,6 +26,8 @@ public class GameManager {
         ui = new UserInterface();
         tileFactory = new TileFactory(ui);
         player = tileFactory.producePlayer(ui.getPlayerChoice()-1);
+        ui.print(String.format("You have selected: %s", player.getName()));
+        tileFactory.setPlayer(player);
         levelsList = new ArrayList<>();
         buildLevels(path);
     }
@@ -95,5 +97,7 @@ public class GameManager {
             LevelManager level = startLevel(levelsList.get(i));
             isAlive = level.playLevel();
         }
+        if(isAlive)
+            ui.print("GG WP");
     }
 }

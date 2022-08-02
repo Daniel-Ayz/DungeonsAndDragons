@@ -1,8 +1,9 @@
 package Tiles;
 
 import Game.Position;
+import VisitorPattern.Visited;
 
-public abstract class Tile implements Comparable<Tile>{
+public abstract class Tile implements Comparable<Tile>, Visited {
     protected char character;
     protected Position position;
 
@@ -22,7 +23,7 @@ public abstract class Tile implements Comparable<Tile>{
         this.position = position;
     }
     //abstract-------------------
-    protected abstract void accept(Unit unit);
+    public abstract void accept(Unit unit);
     //---------------------------
     @Override
     public int compareTo(Tile tile) {
