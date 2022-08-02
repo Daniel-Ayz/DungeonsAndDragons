@@ -4,7 +4,7 @@ public class Position implements Comparable<Position> {
     private int x;
     private int y;
 
-    protected Position(int x, int y){
+    public Position(int x, int y){
         this.x=x;
         this.y=y;
     }
@@ -30,8 +30,11 @@ public class Position implements Comparable<Position> {
         return (int) Math.sqrt(Math.pow(this.getX()-position.getX(),2)+Math.pow(this.getY()-position.getY(),2));
     }
 
-    protected boolean equals(Position p){
-        return this.getX()==p.getX() && this.getY()==p.getY();
+    @Override
+    public boolean equals(Object p){
+        if (!(p instanceof Position))
+            return false;
+        return this.getX()==((Position)p).getX() && this.getY()==((Position)p).getY();
     }
 
     protected boolean samePosition(int x, int y){

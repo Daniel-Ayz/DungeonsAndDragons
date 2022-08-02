@@ -23,6 +23,10 @@ public class Hunter extends Player {
         this.ticksCount=0;
     }
 
+    public int getArrowsCount(){
+        return this.arrowsCount;
+    }
+
     protected void levelUp() {
         int beforeHealth= health.healthPool;
         int beforeAttack= attackPoints;
