@@ -75,7 +75,11 @@ public class UserInterface {
                     "7. Ygritte              Health: 220/220         Attack: 30              Defense: 2              Level: 1\n" +
                     "        Experience: 0/50                Arrows: 10              Range: 6");
 
-            input = scanner.nextInt();
+            char c = scanner.next().charAt(0);
+            if('1'<=c && c<='7')
+                input= Character.getNumericValue(c);
+            else
+                System.out.println("please enter a number between 1-7");
         }
 
         return input;

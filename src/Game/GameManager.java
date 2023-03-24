@@ -7,8 +7,7 @@ import Tiles.Units.Enemy;
 import Tiles.Units.Player;
 import Tiles.Wall;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -32,26 +31,49 @@ public class GameManager {
         buildLevels(path);
     }
 
-    public List<String> readAllLines(String path) {
-        List<String> lines = Collections.emptyList();
-        try {
-            lines = Files.readAllLines(Paths.get(path));
+//    public List<String> readAllLines(String path) {
+//        List<String> lines = Collections.emptyList();
+//        try {
+//            lines = Files.readAllLines(Paths.get(path));
+//        }
+//        catch (IOException e) {
+//            System.out.println(e.getMessage() + "\n" + e.getStackTrace());
+//        }
+//        return lines;
+//    }
+
+//    public void buildLevels(String path){
+//        int level = 1;
+//        String filePath = path + "\\level" + level + ".txt";
+//        File file = new File(filePath);
+//        while (file.exists()){
+//            levelsList.add(readAllLines(filePath));
+//            level++;
+//            filePath = path + "\\level" + level + ".txt";
+//            file = new File(filePath);
+//        }
+//    }
+
+    public void buildOneLevel(String levelName){
+        try{
+            InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(levelName);
+            InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader in = new BufferedReader(streamReader);
+            List<String> levelLines = new ArrayList<>();
+            for(String line; (line = in.readLine()) != null;){
+                levelLines.add(line);
+            }
+            levelsList.add(levelLines);
         }
-        catch (IOException e) {
+        catch(IOException e){
             System.out.println(e.getMessage() + "\n" + e.getStackTrace());
         }
-        return lines;
     }
 
     public void buildLevels(String path){
-        int level = 1;
-        String filePath = path + "\\level" + level + ".txt";
-        File file = new File(filePath);
-        while (file.exists()){
-            levelsList.add(readAllLines(filePath));
-            level++;
-            filePath = path + "\\level" + level + ".txt";
-            file = new File(filePath);
+        for(int level = 1; level <= 4; level++){
+            String filePath = path + "level" + level + ".txt";
+            buildOneLevel(filePath);
         }
     }
 
