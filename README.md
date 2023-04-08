@@ -7,3 +7,8 @@ To run the game:
 
 * If you have a problem running it via double clicking check that you hava Java and JDK installed and try to run it via cmd by the next command:
 java -jar DangeonsAndDragons.jar
+
+![Screenshot](Screenshot1.png)
+![Screenshot](Screenshot2.png)
+![Screenshot](Screenshot4.png)
+![Screenshot](Screenshot3.png)
